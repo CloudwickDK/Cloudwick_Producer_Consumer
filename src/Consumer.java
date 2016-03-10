@@ -1,3 +1,5 @@
+import java.util.Random;
+
 
 public class Consumer implements Runnable {
 
@@ -9,11 +11,12 @@ public class Consumer implements Runnable {
 	
 	public void run(){
 		String message = null;
+		Random rnd = new Random();
 		while(!((message = box.take()).equals("DONE"))){
 			System.out.println(message);
 
 			try {
-				Thread.sleep(15);
+				Thread.sleep(Math.abs(rnd.nextInt(500)));
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
