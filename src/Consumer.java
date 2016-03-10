@@ -1,4 +1,8 @@
-
+/**
+ * 
+ * @author Bhavin Tandel
+ *	
+ */
 public class Consumer implements Runnable {
 
 	Box box;
