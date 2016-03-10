@@ -19,15 +19,12 @@ public class Box {
 	public synchronized String take(){
 		while(empty){
 			try{
-				System.out.println("I am in take wait function");
 				wait();
 			}catch (InterruptedException e) {
-				//System.out.println("I am in take function");
 			}
 		}
-		System.out.println("I am in take function");
 		notifyAll();
-		String message= messages.pop();
+		String message= messages.remove();
 		empty = messages.isEmpty();
 		return message;
 	}
@@ -35,14 +32,11 @@ public class Box {
 	public synchronized void put(String message){
 		while(this.messages.size() >= queueSize){
 			try{
-				System.out.println("I am in put wait function");
 				wait();
 			} catch (InterruptedException e) {
-				//System.out.println("I am in take function");
 			}
 		}
-		System.out.println("I am in put function");
-		this.messages.push(message);
+		this.messages.add(message);
 		empty = message.isEmpty();
 		notifyAll();
 	}
