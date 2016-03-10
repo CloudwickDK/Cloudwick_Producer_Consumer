@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * 
  * @author Bhavin Tandel
@@ -13,13 +15,13 @@ public class Producer implements Runnable {
 	
 	public void run(){
 		String[] strArray = {"The", "Lazy", "Fox", "Jumps", "Over", "Brown", "Dog"};
-		
+		Random rnd = new Random();
 		for (String str : strArray){
 			box.put(str);
 
 			try {
 
-				Thread.sleep(15);
+				Thread.sleep(Math.abs(rnd.nextInt(500)));
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
