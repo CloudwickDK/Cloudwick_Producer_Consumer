@@ -14,10 +14,8 @@ public class Box {
 	public synchronized String take(){
 		while(empty){
 			try{
-				//System.out.println("I am in take function");
 				wait();
 			}catch (InterruptedException e) {
-				//System.out.println("I am in take function");
 			}
 		}
 		notifyAll();
@@ -28,11 +26,9 @@ public class Box {
 	public synchronized void put(String message){
 		while(!empty){
 			try{
-				//System.out.println("I am in put function");
 
 				wait();
 			} catch (InterruptedException e) {
-				//System.out.println("I am in take function");
 			}
 		}
 		empty = false;
