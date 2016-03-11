@@ -1,30 +1,32 @@
+import java.util.concurrent.ArrayBlockingQueue;
+
 /**
  * 
  * @author Bhavin Tandel
- * @since  10/03/2016; 12:51
+ * @since 10/03/2016; 12:51
  */
 public class Producer implements Runnable {
-	Box box;
-	
-	public Producer(Box box){
-		this.box = box;
+
+	ArrayBlockingQueue<String> queue;
+
+	public Producer(ArrayBlockingQueue<String> queue) {
+		this.queue = queue;
 
 	}
-	
-	public void run(){
-		String[] strArray = {"The", "Lazy", "Fox", "Jumps", "Over", "Brown", "Dog"};
-		
-		for (String str : strArray){
-			box.put(str);
 
-			try {
+	public void run() {
+		String[] strArray = { "The", "Lazy", "Fox", "Jumps", "Over", "Brown", "Dog" };
 
+		try {
+			for (String str : strArray) {
+				queue.put(str);
 				Thread.sleep(15);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
+			queue.put("DONE");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		box.put("DONE");
 	}
 
 }
