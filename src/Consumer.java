@@ -1,3 +1,5 @@
+import java.util.concurrent.ArrayBlockingQueue;
+
 /**
  * 
  * @author Bhavin Tandel
@@ -5,22 +7,23 @@
  */
 public class Consumer implements Runnable {
 
-	Box box;
+	ArrayBlockingQueue<String> arrayBlockingQueue;
 	
-	public Consumer(Box box){
-		this.box = box;
+	public Consumer(ArrayBlockingQueue<String> arrayBlockingQueue){
+		this.arrayBlockingQueue = arrayBlockingQueue;
 	}
 	
 	public void run(){
 		String message = null;
-		while(!((message = box.take()).equals("DONE"))){
+		try {
+			while(!((message = arrayBlockingQueue.take()).equals("DONE"))){
 			System.out.println(message);
 
-			try {
+			
 				Thread.sleep(15);
-			} catch (InterruptedException e) {
+			}
+		}catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-	}
-}
+}//Consumer
